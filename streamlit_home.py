@@ -157,4 +157,47 @@ else:
             row['data'] = ast.literal_eval(row['data'])
             results_list.append(row)
 
-    st.json(results_list)
+    query_list = [i['query'] for i in results_list]
+    option = st.selectbox(
+        "哪個收尋的歷史資料？",
+        query_list,
+    )
+
+    data = [i for i in results_list if i['query']==option][0]['data']
+    
+    # Show answer
+    # Show all info (ncku) #################################################################
+    st.header("銀髮友善住宅設計原則之研究（成大）")
+    for index, match in enumerate(data['ncku']):
+        st.text_area(
+            f"排序{index+1}, 頁數：{int(match['page'])}, 相似度：{round(match['score'], 3)}",
+            match['content'],
+            height=300
+        )
+
+    # Show all info (japan) #################################################################
+    st.header("日本高齡者居住的住宅設計指南（日本）")
+    for index, match in enumerate(data['japan']):
+        st.text_area(
+            f"排序{index+1}, 頁數：{int(match['page'])}, 相似度：{round(match['score'], 3)}",
+            match['content'],
+            height=300
+        )
+
+    # Show all info (china) #################################################################
+    st.header("老年人居住建築設計規範（中國）")
+    for index, match in enumerate(data['china']):
+        st.text_area(
+            f"排序{index+1}, 頁數：{int(match['page'])}, 相似度：{round(match['score'], 3)}",
+            match['content'],
+            height=300
+        )
+
+    # Show all info (taipei) #################################################################
+    st.header("臺北市居住空間通用設計指南（臺北市）")
+    for index, match in enumerate(data['taipei']):
+        st.text_area(
+            f"排序{index+1}, 頁數：{int(match['page'])}, 相似度：{round(match['score'], 3)}",
+            match['content'],
+            height=300
+        )
