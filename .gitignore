@@ -1,0 +1,8 @@
+*.pdf
+config.ini
+uploadd_pdf_to_pinecone.py
+env_oldman
+.ipynb_checkpoints
+_.ipynb
+find_similarity_from_pinecone.py
+home.py
